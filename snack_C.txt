@@ -1,0 +1,40 @@
+	Créer un dossier de votre choix
+
+#il vas y avoir deux sous dossier et une fichier icone.c
+	-quiz :
+		a.bmp
+		c.bmp
+		cible.bmp
+		fichier
+		fichier2.txt
+		fichier.txt
+		image.bmp
+		k.bmp	
+		lorem.txt
+		mon
+		n.bmp
+		s.bmp
+		seconfichier
+		snack_C.txt
+		test2
+		titina.bmp
+		tt.bmp
+	-snack : 
+		Black Mortal TTF Personal.ttf
+		game_over.bmp
+		pause.bmp
+		play.bmp
+		quitter.bmp
+		sn.txt
+
+Pour le compiler,verifier que votre machine dispose d'une 
+compilateur gcc et d'une bibliothe SDL avec,
+
+Il y a une fichier ici qui est déja compiler
+	-prog
+
+Administrateur : Heritina
+Contact : fanomezantsoaheritina09@gmail.com
+
+
+	
