@@ -1,0 +1,73 @@
+	Créer un dossier avec un nom de votre choix :
+ dans cette dossier il va y avoir deux sous dossier : 
+ tpM et StpM
+#les fichier suivant devront être dans StpM :
+	cCompte.css
+	index.css
+	SChat.css
+	utilisateur.png
+
+#les fichier suivant devront être dans tpM :
+	cCompte.php
+	chat.php
+	index.php
+	retest.php
+	sCompte.php
+	security.php
+	tchat.php
+	test.php
+	traiterCompte.php
+	verification_nom.php
+
+
+#Remarque :
+Ses fichier devront être dans une machine de rôle serveur 
+pour que tous les clients puisse y utiliser 
+	Côté serveur : 
+		-Cette machine devrait avoir phpmyadmin
+		pour la gestion de base donne
+		-Dans cette BDD ,il devrait avoir :
+		    -une base de donne Message 
+		    -Message : une table Chat :
+		     -colone (tous obligatoire):
+		      -ID : INT primaire auto increment
+		      -Nom : Varchar
+		      -message : text
+		      -date-creation : date
+		    -Message : une table Compte :
+                      -ID : INT primaire auto increment
+                      -Nom : Varchar
+                      -Password : text
+                      -date-creation : date
+
+Aussi, la connexion (nom BDD,utilisateur,motdePasse)
+au base de donne utiliser avec PHP utiliser dans le 
+code sera le mien
+Veuillez alors de bien verifier le votre et apporter 
+la modification nécessaire dans les fichiers : 
+	-chat.php
+	-tchat.php
+	-test.php
+	-traiterCompte.php
+
+Voici la partie du code en question dans ces 
+fichiers : 
+
+    try
+    {
+        $bdd = new PDO('mysql:host=localhost;dbname=Message', 'root', 'h');
+    }
+    catch(Exception $e)
+    {
+        die('Erreur : '.$e->getMessage());
+    }
+
+Donc remplacer root (utilisateur) et h (motdepasse)
+avec les vôtres,
+
+Mercie d'avoir lue jusqu'à la fin et veuillez contacter 
+l'admnistrateur du cette projet si vous avez besoin d'
+aide
+
+Administrateur : Heritina
+Contact : fanomezantsoaheritina09@gmail.com
