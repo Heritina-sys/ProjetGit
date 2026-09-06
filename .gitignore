@@ -1,0 +1,51 @@
+## ---------------------------------------------------------------------------
+## Local configuration — never commit real credentials
+##
+## db.php is created from db.example.php and holds database credentials.
+## See SECURITY.md for the incident history behind this rule.
+## ---------------------------------------------------------------------------
+db.php
+.env
+.env.*
+!.env.example
+
+## ---------------------------------------------------------------------------
+## Compiled C output
+##
+## `prog` (an x86-64 ELF binary) was committed to this repository. Build
+## artifacts do not belong in version control — build from source instead:
+##     make            (see docs/BUILD.md)
+## ---------------------------------------------------------------------------
+prog
+tri_eleves
+*.o
+*.a
+*.so
+*.out
+a.out
+*.exe
+*.gch
+*.dSYM/
+
+## ---------------------------------------------------------------------------
+## Real personal data
+##
+## Students.csv in this repository is an ANONYMISED fixture. The file
+## originally contained names, birth dates, home addresses and phone numbers
+## of 41 real students and was public from 2024 to 2026 — see SECURITY.md.
+## Never replace it with real data; keep real datasets outside the repository.
+## ---------------------------------------------------------------------------
+Students.local.csv
+students.real.csv
+*.private.csv
+
+## ---------------------------------------------------------------------------
+## Editor and OS noise
+## ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

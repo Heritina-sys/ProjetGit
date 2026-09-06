@@ -2,14 +2,7 @@
     session_start();
     $_SESSION['nom'] = $_POST['nom'];
   /// On se connecte à la base de données:
-    try
-    {
-        $bdd = new PDO('mysql:host=localhost;dbname=Message', 'root', 'h');
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+    require_once __DIR__ . '/db.php';   // provides $bdd — see db.example.php
     $reponse = $bdd->query('SELECT * FROM Compte');
     $test = false;
     ///testons si le nom existe ou pas

@@ -1,13 +1,6 @@
 <?php
         session_start();
-        try
-        {
-            $bdd = new PDO('mysql:host=localhost;dbname=Message', 'root', 'h');
-        }
-        catch(Exception $e)
-        {
-            die('Erreur : '.$e->getMessage());
-        }
+        require_once __DIR__ . '/db.php';   // provides $bdd — see db.example.php
         $reponse = $bdd->query('SELECT * FROM Chat ORDER BY ID DESC LIMIT 0, 10');
 ?>
 <!doctype html>
