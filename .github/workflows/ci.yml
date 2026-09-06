@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-c:
+    name: Build and run the C sort
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: make clean && make records
+
+      # The program reads Students.csv from the working directory. The fixture
+      # is anonymised (see SECURITY.md) so running it in CI is safe.
+      - name: Run
+        run: ./tri_eleves > /tmp/out.txt
+
+      - name: Check it printed all records
+        run: |
+          n=$(grep -c '^' /tmp/out.txt)
+          if [ "$n" -lt 80 ]; then
+            echo "::error::Expected ~40 records each printed across two lines; got $n lines."
+            exit 1
+          fi
+
+  lint-php:
+    name: Lint the PHP sources
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PHP
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends php-cli
+
+      # db.php is gitignored and holds real credentials; db.example.php is the
+      # committed template. Lint everything tracked.
+      - name: Syntax check
+        run: |
+          for f in *.php; do
+            php -l "$f"
+          done
+
+  hygiene:
+    name: Hygiene
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # The PHP DB password must never reappear in a tracked file. This checks
+      # the current tree; see SECURITY.md about history.
+      - name: Reject inline DB credentials
+        run: |
+          if git grep -nIE "new\s+PDO\('mysql:[^']*',\s*'root'" -- '*.php'; then
+            echo "::error::Inline MySQL credentials found. Database access goes through the gitignored db.php (see db.example.php)."
+            exit 1
+          fi
+
+      # Build outputs were committed historically (prog). Never again.
+      - name: Reject build outputs
+        run: |
+          if git ls-files -- 'prog' 'tri_eleves' '*.o' '*.exe' | grep -q .; then
+            echo "::error::A build artifact is tracked. Build from source (make), and read the .gitignore comments."
+            exit 1
+          fi
+
+      # Students.csv must stay an anonymised fixture. Heuristic: a real student
+      # list would not be flagged here, but any *obvious* real data is. The
+      # authoritative rule is human review, documented in SECURITY.md.
+      - name: Students.csv sanity
+        run: |
+          if grep -qE '^\w+\.\w{2,}@' Students.csv; then
+            echo "::error::Students.csv appears to contain real email addresses. Keep the anonymised fixture."
+            exit 1
+          fi
+          n=$(($(wc -l < Students.csv) - 1))
+          if [ "$n" -ne 41 ]; then
+            echo "::error::Expected 41 data rows in Students.csv (the C parser depends on the count); found $n."
+            exit 1
+          fi

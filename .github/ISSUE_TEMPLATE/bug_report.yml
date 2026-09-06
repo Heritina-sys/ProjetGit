@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in one of the projects behaves incorrectly
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repo contains several unrelated projects. First say which one.
+
+        **Do not paste real personal data** (student names, addresses, phone
+        numbers) into issues — the repository is public. Redact or invent.
+        **Do not report security issues here.** Follow
+        [SECURITY.md](https://github.com/Heritina-sys/ProjetGit/blob/main/SECURITY.md).
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: Which project
+      options:
+        - C — Tri d'étudiants
+        - SDL2 — Snack Game (icone.c)
+        - PHP — Chat One
+        - Python — snack.py
+        - Documentation / tooling
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. gcc -std=c11 -D_GNU_SOURCE main.c eleve.c -o tri_eleves
+        2. ./tri_eleves
+        3. It prints one record too many / crashes
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, compiler version (`gcc --version`), PHP version if relevant, SDL2 version if relevant.
+      placeholder: Ubuntu 24.04, gcc 13.3.0
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: Output of `git rev-parse --short HEAD`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot / output
+      description: Paste terminal output or attach a screenshot. Redact anything personal.
+      render: text

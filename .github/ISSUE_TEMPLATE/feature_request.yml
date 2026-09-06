@@ -1,0 +1,47 @@
+name: Feature request
+description: Suggest an improvement to one of the projects
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Several unrelated projects live here. Say which one you mean, and check
+        the [Known limitations](https://github.com/Heritina-sys/ProjetGit#known-limitations)
+        list in the README first — the C off-by-one and the clear-text
+        passwords are already tracked.
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: Which project
+      options:
+        - C — Tri d'étudiants
+        - SDL2 — Snack Game (icone.c)
+        - PHP — Chat One
+        - Python — snack.py
+        - Tooling / CI / documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you have in mind
+    validations:
+      required: true
+
+  - type: textarea
+    id: security
+    attributes:
+      label: Is this security-related?
+      description: >
+        Clear-text passwords, credential handling, or data exposure belong in a
+        pull request (with SECURITY.md open) rather than a public discussion.
+      placeholder: No, or describe briefly

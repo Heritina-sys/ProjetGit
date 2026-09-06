@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/Heritina-sys/ProjetGit/security/advisories/new
+    about: Report privately. Never in a public issue — see SECURITY.md.
+  - name: Code of conduct
+    url: https://github.com/Heritina-sys/ProjetGit/blob/main/CODE_OF_CONDUCT.md
+    about: Before commenting — the repository handled real personal data once and the rules reflect that.

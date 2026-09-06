@@ -1,0 +1,27 @@
+# EditorConfig — https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 88
+
+# The C sources are written with tabs; do not reformat existing files.
+[*.c]
+indent_style = tab
+
+[*.h]
+indent_style = tab
+
+# Markdown: preserve hard line breaks (two trailing spaces).
+[*.md]
+trim_trailing_whitespace = false
+
+# Students.csv is a data fixture; a trailing blank line would change the record
+# count the C parser relies on. Leave it exactly as it is.
+[Students.csv]
+insert_final_newline = false
